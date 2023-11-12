@@ -10,7 +10,7 @@ import (
 
 func run(proj string, out io.Writer) error {
 	if proj == "" {
-		return fmt.Errorf("Project directory is required")
+		return fmt.Errorf("Project directory is required: %w", ErrValidation)
 	}
 
 	args := []string{"build", ".", "errors"}
@@ -24,7 +24,6 @@ func run(proj string, out io.Writer) error {
 	_, err := fmt.Fprintln(out, "Go Build: SUCCESS")
 
 	return err
-
 }
 
 func main() {
