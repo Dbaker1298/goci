@@ -24,12 +24,14 @@ func newTimeoutStep(name, exe, message, proj string, args []string, timeout time
 	return s
 }
 
+var command = exec.CommandContext
+
 // Define the method execute for timeoutStep
 func (s timeoutStep) execute() (string, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), s.timeout)
 	defer cancel()
 
-	cmd := exec.CommandContext(ctx, s.exe, s.args...)
+	cmd := command(ctx, s.exe, s.args...)
 	cmd.Dir = s.proj
 
 	if err := cmd.Run(); err != nil {
