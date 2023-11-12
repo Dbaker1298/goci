@@ -5,7 +5,10 @@ import (
 	"fmt"
 )
 
-var ErrValidation = errors.New("Validation failed")
+var (
+	ErrValidation = errors.New("Validation failed")
+	ErrSignal     = errors.New("Signal received")
+)
 
 type stepErr struct {
 	step  string
